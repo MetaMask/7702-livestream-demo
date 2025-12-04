@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  getDeleGatorEnvironment,
+  getSmartAccountsEnvironment,
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 import Image from "next/image";
 import { createPimlicoClient } from "permissionless/clients/pimlico";
 import { useState } from "react";
@@ -73,7 +73,7 @@ export default function Home() {
 
       const authorization = await walletClient.signAuthorization({
         account: walletClient.account!,
-        address: getDeleGatorEnvironment(chain.id).implementations
+        address: getSmartAccountsEnvironment(chain.id).implementations
           .EIP7702StatelessDeleGatorImpl,
         chainId: chain.id,
         executor: "self",
@@ -109,7 +109,7 @@ export default function Home() {
         client: publicClient,
         implementation: Implementation.Stateless7702,
         address,
-        signatory: { account: walletClient.account! },
+        signer: { account: walletClient.account! },
       });
 
       const { fast: fees } = await pimlicoClient.getUserOperationGasPrice();
